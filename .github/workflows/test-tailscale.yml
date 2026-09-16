@@ -11,28 +11,10 @@ jobs:
         run: |
           curl -fsSL https://tailscale.com/install.sh | sh
       
-      - name: Test with all flags
+      - name: Connect (exact copy of successful test)
         env:
           TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
         run: |
-          echo "Auth key: ${TS_AUTHKEY:0:20}..."
-          # Try with all flags
-          tailscale up \
-            --authkey="$TS_AUTHKEY" \
-            --hostname=test-gh \
-            --accept-dns=false \
-            --accept-routes=false \
-            --shields-up=false \
-            --verbose=2 2>&1 | tee output.txt
-          EXIT_CODE=${PIPESTATUS[0]}
-          echo "Exit code: $EXIT_CODE"
-          cat output.txt
-          
-      - name: Check status regardless
-        run: |
-          echo "--- Status ---"
-          tailscale status 2>&1 || true
-          echo "--- Version ---"
-          tailscale version 2>&1
-          echo "--- IP ---"
-          tailscale ip -4 2>&1 || true
+          tailscale up --authkey="$TS_AUTHKEY" --hostname=test-gh --accept-dns=false --accept-routes=false --verbose=2 2>&1
+          echo "Exit code: $?"
+          tailscale status 2>&1
