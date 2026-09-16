@@ -26,13 +26,6 @@ jobs:
           curl -fsSL https://tailscale.com/install.sh | sh
           echo "✅ Tailscale installed"
       
-      - name: Debug Auth Key
-        env:
-          TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
-        run: |
-          echo "Auth key length: ${#TS_AUTHKEY}"
-          echo "Auth key prefix: ${TS_AUTHKEY:0:20}..."
-      
       - name: Connect as Exit Node
         env:
           TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
@@ -42,14 +35,15 @@ jobs:
             --authkey="$TS_AUTHKEY" \
             --hostname="gh-exit-${{ github.run_id }}" \
             --advertise-exit-node \
-            --accept-routes \
             --accept-dns=false \
-            --verbose=2 2>&1 | tee tailscale.log
+            --accept-routes=false \
+            --verbose=1 2>&1 | tee tailscale.log
           
-          echo "Exit code: ${PIPESTATUS[0]}"
+          EXIT_CODE=${PIPESTATUS[0]}
           cat tailscale.log
+          echo "Exit code: $EXIT_CODE"
           
-          if [ ${PIPESTATUS[0]} -eq 0 ]; then
+          if [ $EXIT_CODE -eq 0 ]; then
             echo "✅ Connected!"
             tailscale status
           else
@@ -60,16 +54,20 @@ jobs:
       - name: Verify Exit Node
         run: |
           echo "🔍 Checking exit node status..."
-          EXIT_STATUS=$(tailscale status --json | jq -r '.Self.ExitNodeStatus.BriefExitNode // "none"')
+          EXIT_STATUS=$(tailscale status --json 2>/dev/null | jq -r '.Self.ExitNodeStatus.BriefExitNode // "none"')
           echo "Exit Node Status: $EXIT_STATUS"
           
           if [ "$EXIT_STATUS" != "none" ] && [ -n "$EXIT_STATUS" ]; then
             echo "✅ Exit Node is ACTIVE!"
           else
-            echo "⚠️ Exit Node not active yet, may need admin approval"
+            echo "⚠️ Exit Node not active yet - check admin console"
+            echo "👉 https://login.tailscale.com/admin/machines"
           fi
           
-          echo "📍 Tailscale IP: $(tailscale ip -4)"
+          TS_IP=$(tailscale ip -4 2>/dev/null || echo "N/A")
+          echo "📍 Tailscale IP: $TS_IP"
+          echo "TS_IP=$TS_IP" >> $GITHUB_ENV
+          echo "EXIT_STATUS=$EXIT_STATUS" >> $GITHUB_ENV
       
       - name: Install Cloudflared
         run: |
@@ -82,23 +80,56 @@ jobs:
           TUNNEL_TOKEN: ${{ secrets.CF_TUNNEL_TOKEN }}
         run: |
           if [ -n "$TUNNEL_TOKEN" ]; then
-            echo "🌐 Starting Cloudflare Tunnel..."
+            echo "🌐 Starting Cloudflare Named Tunnel..."
             nohup cloudflared tunnel --no-autoupdate run --token "$TUNNEL_TOKEN" > tunnel.log 2>&1 &
+            TUNNEL_PID=$!
             sleep 5
-            echo "✅ Tunnel started"
+            echo "✅ Tunnel started (PID: $TUNNEL_PID)"
             cat tunnel.log
+            echo "TUNNEL_PID=$TUNNEL_PID" >> $GITHUB_ENV
           else
-            echo "⚠️ No tunnel token, using quick tunnel..."
+            echo "⚠️ No tunnel token, using Quick Tunnel..."
             nohup cloudflared tunnel --no-autoupdate --url http://localhost:8080 > tunnel.log 2>&1 &
+            TUNNEL_PID=$!
             sleep 10
-            grep -o 'https://.*trycloudflare.com' tunnel.log | head -1 > host.txt || true
-            cat host.txt
+            QUICK_URL=$(grep -o 'https://.*trycloudflare.com' tunnel.log | head -1)
+            if [ -n "$QUICK_URL" ]; then
+              echo "🔗 Quick Tunnel: $QUICK_URL"
+              echo "$QUICK_URL" > host.txt
+              echo "QUICK_URL=$QUICK_URL" >> $GITHUB_ENV
+            else
+              echo "⚠️ Quick tunnel not ready yet"
+            fi
+            echo "TUNNEL_PID=$TUNNEL_PID" >> $GITHUB_ENV
           fi
+      
+      - name: Show Connection Info
+        run: |
+          echo "═══════════════════════════════════════"
+          echo "   🎯 TAILSCALE EXIT NODE INFO"
+          echo "═══════════════════════════════════════"
+          echo "📍 Tailscale IP: ${{ env.TS_IP }}"
+          echo "🚪 Exit Node: ${{ env.EXIT_STATUS }}"
+          if [ -n "${{ env.QUICK_URL }}" ]; then
+            echo "🌐 Cloudflare URL: ${{ env.QUICK_URL }}"
+            echo ""
+            echo "📱 برای دوستات:"
+            echo "   1. اپ Tailscale رو نصب کن"
+            echo "   2. با لینک دعوت وصل شو"
+            echo "   3. Exit Node رو انتخاب کن: gh-exit-${{ github.run_id }}"
+            echo ""
+            echo "🔗 یا از Cloudflare:"
+            echo "   ${{ env.QUICK_URL }}"
+          fi
+          echo "═══════════════════════════════════════"
+          echo "🔗 GitHub Actions: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       
       - name: Keep Alive
         run: |
           echo "⏳ Keeping exit node alive for ${{ github.event.inputs.duration || '350' }} minutes..."
-          echo "📊 Runner: $(curl -s http://ip-api.com/line/?fields=country,city,as 2>/dev/null || echo 'unknown')"
+          echo "📊 Runner Location:"
+          curl -s http://ip-api.com/line/?fields=country,city,as,query 2>/dev/null | paste -sd ' ' - || echo "Unknown"
+          echo ""
           sleep $(( ${{ github.event.inputs.duration || '350' }} * 60 ))
       
       - name: Auto-chain Next Run
@@ -114,6 +145,10 @@ jobs:
       - name: Cleanup
         if: always()
         run: |
+          echo "🛑 Cleaning up..."
           tailscale down 2>/dev/null || true
+          if [ -n "${{ env.TUNNEL_PID }}" ]; then
+            kill ${{ env.TUNNEL_PID }} 2>/dev/null || true
+          fi
           pkill cloudflared 2>/dev/null || true
-          echo "🛑 Cleaned up"
+          echo "✅ Cleaned up"
