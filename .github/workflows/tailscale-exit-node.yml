@@ -31,7 +31,7 @@ jobs:
           TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
         run: |
           echo "🔗 Connecting to Tailscale..."
-          tailscale up \
+          sudo tailscale up \
             --authkey="$TS_AUTHKEY" \
             --hostname="gh-exit-${{ github.run_id }}" \
             --accept-dns=false \
@@ -43,7 +43,7 @@ jobs:
           
           if [ $EXIT_CODE -eq 0 ]; then
             echo "✅ Connected!"
-            tailscale status
+            sudo tailscale status
           else
             echo "❌ Connection failed"
             exit 1
@@ -55,7 +55,7 @@ jobs:
         run: |
           echo "🚪 Enabling Exit Node..."
           # Try to enable exit node
-          tailscale set --advertise-exit-node 2>&1 | tee exit_node.log
+          sudo tailscale set --advertise-exit-node 2>&1 | tee exit_node.log
           EXIT_CODE=${PIPESTATUS[0]}
           cat exit_node.log
           
@@ -68,7 +68,7 @@ jobs:
       - name: Verify Exit Node
         run: |
           echo "🔍 Checking exit node status..."
-          EXIT_STATUS=$(tailscale status --json 2>/dev/null | jq -r '.Self.ExitNodeStatus.BriefExitNode // "none"')
+          EXIT_STATUS=$(sudo tailscale status --json 2>/dev/null | jq -r '.Self.ExitNodeStatus.BriefExitNode // "none"')
           echo "Exit Node Status: $EXIT_STATUS"
           
           if [ "$EXIT_STATUS" != "none" ] && [ -n "$EXIT_STATUS" ]; then
@@ -78,7 +78,7 @@ jobs:
             echo "👉 https://login.tailscale.com/admin/machines"
           fi
           
-          TS_IP=$(tailscale ip -4 2>/dev/null || echo "N/A")
+          TS_IP=$(sudo tailscale ip -4 2>/dev/null || echo "N/A")
           echo "📍 Tailscale IP: $TS_IP"
           echo "TS_IP=$TS_IP" >> $GITHUB_ENV
           echo "EXIT_STATUS=$EXIT_STATUS" >> $GITHUB_ENV
@@ -160,7 +160,7 @@ jobs:
         if: always()
         run: |
           echo "🛑 Cleaning up..."
-          tailscale down 2>/dev/null || true
+          sudo tailscale down 2>/dev/null || true
           if [ -n "${{ env.TUNNEL_PID }}" ]; then
             kill ${{ env.TUNNEL_PID }} 2>/dev/null || true
           fi
