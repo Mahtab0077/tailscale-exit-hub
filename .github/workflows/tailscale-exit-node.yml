@@ -1,0 +1,103 @@
+name: Tailscale Exit Node
+
+on:
+  workflow_dispatch:
+    inputs:
+      duration:
+        description: 'Duration in minutes (max 350)'
+        required: false
+        default: '350'
+      chain:
+        description: 'Auto-chain next run'
+        required: false
+        default: 'true'
+
+jobs:
+  exit-node:
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ fromJson(github.event.inputs.duration || '350') }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Install Tailscale
+        run: |
+          curl -fsSL https://tailscale.com/install.sh | sh
+          echo "✅ Tailscale installed"
+      
+      - name: Connect as Exit Node
+        env:
+          TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
+        run: |
+          echo "🔗 Connecting to Tailscale..."
+          tailscale up \
+            --authkey="$TS_AUTHKEY" \
+            --hostname="gh-exit-${{ github.run_id }}" \
+            --advertise-exit-node \
+            --accept-routes \
+            --accept-dns=false
+          
+          echo "✅ Connected!"
+          tailscale status
+      
+      - name: Verify Exit Node
+        run: |
+          echo "🔍 Checking exit node status..."
+          EXIT_STATUS=$(tailscale status --json | jq -r '.Self.ExitNodeStatus.BriefExitNode // "none"')
+          echo "Exit Node Status: $EXIT_STATUS"
+          
+          if [ "$EXIT_STATUS" != "none" ] && [ -n "$EXIT_STATUS" ]; then
+            echo "✅ Exit Node is ACTIVE!"
+          else
+            echo "⚠️ Exit Node not active yet, may need admin approval"
+          fi
+          
+          echo "📍 Tailscale IP: $(tailscale ip -4)"
+      
+      - name: Install Cloudflared
+        run: |
+          wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+          sudo dpkg -i cloudflared-linux-amd64.deb
+          echo "✅ Cloudflared installed"
+      
+      - name: Start Cloudflare Tunnel
+        env:
+          TUNNEL_TOKEN: ${{ secrets.CF_TUNNEL_TOKEN }}
+        run: |
+          if [ -n "$TUNNEL_TOKEN" ]; then
+            echo "🌐 Starting Cloudflare Tunnel..."
+            nohup cloudflared tunnel --no-autoupdate run --token "$TUNNEL_TOKEN" > tunnel.log 2>&1 &
+            sleep 5
+            echo "✅ Tunnel started"
+            cat tunnel.log
+          else
+            echo "⚠️ No tunnel token, using quick tunnel..."
+            nohup cloudflared tunnel --no-autoupdate --url http://localhost:8080 > tunnel.log 2>&1 &
+            sleep 10
+            grep -o 'https://.*trycloudflare.com' tunnel.log | head -1 > host.txt || true
+            cat host.txt
+          fi
+      
+      - name: Keep Alive
+        run: |
+          echo "⏳ Keeping exit node alive for ${{ github.event.inputs.duration || '350' }} minutes..."
+          echo "📊 Runner: $(curl -s http://ip-api.com/line/?fields=country,city,as 2>/dev/null || echo 'unknown')"
+          sleep $(( ${{ github.event.inputs.duration || '350' }} * 60 ))
+      
+      - name: Auto-chain Next Run
+        if: ${{ github.event.inputs.chain == 'true' }}
+        run: |
+          echo "🔄 Triggering next run..."
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/${{ github.workflow }}/dispatches" \
+            -d '{"ref":"${{ github.ref }}","inputs":{"duration":"${{ github.event.inputs.duration }}","chain":"true"}}'
+      
+      - name: Cleanup
+        if: always()
+        run: |
+          tailscale down 2>/dev/null || true
+          pkill cloudflared 2>/dev/null || true
+          echo "🛑 Cleaned up"
