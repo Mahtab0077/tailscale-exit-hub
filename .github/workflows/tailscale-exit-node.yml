@@ -26,6 +26,13 @@ jobs:
           curl -fsSL https://tailscale.com/install.sh | sh
           echo "✅ Tailscale installed"
       
+      - name: Debug Auth Key
+        env:
+          TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
+        run: |
+          echo "Auth key length: ${#TS_AUTHKEY}"
+          echo "Auth key prefix: ${TS_AUTHKEY:0:20}..."
+      
       - name: Connect as Exit Node
         env:
           TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
@@ -36,10 +43,19 @@ jobs:
             --hostname="gh-exit-${{ github.run_id }}" \
             --advertise-exit-node \
             --accept-routes \
-            --accept-dns=false
+            --accept-dns=false \
+            --verbose=2 2>&1 | tee tailscale.log
           
-          echo "✅ Connected!"
-          tailscale status
+          echo "Exit code: ${PIPESTATUS[0]}"
+          cat tailscale.log
+          
+          if [ ${PIPESTATUS[0]} -eq 0 ]; then
+            echo "✅ Connected!"
+            tailscale status
+          else
+            echo "❌ Connection failed"
+            exit 1
+          fi
       
       - name: Verify Exit Node
         run: |
