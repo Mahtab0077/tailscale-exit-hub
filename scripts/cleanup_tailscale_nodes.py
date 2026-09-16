@@ -70,8 +70,8 @@ def main():
     for did, name in offline_or_gh_nodes:
         print(f"   - {name} (ID: {did})")
 
-    confirm = input("\nDo you want to delete these nodes from your Tailscale account? (y/N): ").strip().lower()
-    if confirm != 'y':
+    confirm = os.environ.get("AUTO_CONFIRM", "yes").strip().lower()
+    if confirm != 'y' and confirm != 'yes':
         print("❌ Operation cancelled.")
         return
 
