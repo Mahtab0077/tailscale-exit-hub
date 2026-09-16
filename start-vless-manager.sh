@@ -20,7 +20,6 @@ echo "  List:      curl http://localhost:9090/api/users"
 echo "  Generate:  curl 'http://localhost:9090/api/subscription?host=your-tunnel.trycloudflare.com'"
 echo ""
 
-$PANEL_PID = $!
 echo $PANEL_PID > vless-panel.pid
 
 cleanup() {
