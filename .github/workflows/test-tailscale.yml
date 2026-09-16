@@ -11,10 +11,11 @@ jobs:
         run: |
           curl -fsSL https://tailscale.com/install.sh | sh
       
-      - name: Connect (exact copy of successful test)
+      - name: Connect with ephemeral
         env:
           TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
         run: |
-          tailscale up --authkey="$TS_AUTHKEY" --hostname=test-gh --accept-dns=false --accept-routes=false --verbose=2 2>&1
+          # Try with ephemeral flag
+          tailscale up --authkey="$TS_AUTHKEY" --hostname=test-gh-ephemeral --accept-dns=false --accept-routes=false --verbose=2 2>&1
           echo "Exit code: $?"
           tailscale status 2>&1
