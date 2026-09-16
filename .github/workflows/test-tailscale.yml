@@ -11,11 +11,14 @@ jobs:
         run: |
           curl -fsSL https://tailscale.com/install.sh | sh
       
-      - name: Test Connection
+      - name: Test Connection (verbose)
         env:
           TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
         run: |
           echo "Testing with auth key: ${TS_AUTHKEY:0:20}..."
-          tailscale up --authkey="$TS_AUTHKEY" --hostname=test-gh --accept-routes 2>&1
+          tailscale up --authkey="$TS_AUTHKEY" --hostname=test-gh --accept-routes --verbose=2 2>&1
           echo "Exit code: $?"
-          tailscale status 2>&1
+          echo "--- Status ---"
+          tailscale status 2>&1 || true
+          echo "--- Version ---"
+          tailscale version 2>&1
