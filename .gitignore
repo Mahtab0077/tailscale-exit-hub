@@ -24,3 +24,7 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+# Headscale — هرگز کلیدها/دیتابیس کامیت نشود
+headscale/users_*.csv
+headscale/*.log
+headscale/data/

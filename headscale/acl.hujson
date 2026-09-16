@@ -1,0 +1,216 @@
+// Headscale ACL — 100 users, full isolation, exit-node only access
+{
+  "groups": {
+    "group:admins": [
+      "admin@hs.local"
+    ],
+    "group:users": [
+      "user001@hs.local",
+      "user002@hs.local",
+      "user003@hs.local",
+      "user004@hs.local",
+      "user005@hs.local",
+      "user006@hs.local",
+      "user007@hs.local",
+      "user008@hs.local",
+      "user009@hs.local",
+      "user010@hs.local",
+      "user011@hs.local",
+      "user012@hs.local",
+      "user013@hs.local",
+      "user014@hs.local",
+      "user015@hs.local",
+      "user016@hs.local",
+      "user017@hs.local",
+      "user018@hs.local",
+      "user019@hs.local",
+      "user020@hs.local",
+      "user021@hs.local",
+      "user022@hs.local",
+      "user023@hs.local",
+      "user024@hs.local",
+      "user025@hs.local",
+      "user026@hs.local",
+      "user027@hs.local",
+      "user028@hs.local",
+      "user029@hs.local",
+      "user030@hs.local",
+      "user031@hs.local",
+      "user032@hs.local",
+      "user033@hs.local",
+      "user034@hs.local",
+      "user035@hs.local",
+      "user036@hs.local",
+      "user037@hs.local",
+      "user038@hs.local",
+      "user039@hs.local",
+      "user040@hs.local",
+      "user041@hs.local",
+      "user042@hs.local",
+      "user043@hs.local",
+      "user044@hs.local",
+      "user045@hs.local",
+      "user046@hs.local",
+      "user047@hs.local",
+      "user048@hs.local",
+      "user049@hs.local",
+      "user050@hs.local",
+      "user051@hs.local",
+      "user052@hs.local",
+      "user053@hs.local",
+      "user054@hs.local",
+      "user055@hs.local",
+      "user056@hs.local",
+      "user057@hs.local",
+      "user058@hs.local",
+      "user059@hs.local",
+      "user060@hs.local",
+      "user061@hs.local",
+      "user062@hs.local",
+      "user063@hs.local",
+      "user064@hs.local",
+      "user065@hs.local",
+      "user066@hs.local",
+      "user067@hs.local",
+      "user068@hs.local",
+      "user069@hs.local",
+      "user070@hs.local",
+      "user071@hs.local",
+      "user072@hs.local",
+      "user073@hs.local",
+      "user074@hs.local",
+      "user075@hs.local",
+      "user076@hs.local",
+      "user077@hs.local",
+      "user078@hs.local",
+      "user079@hs.local",
+      "user080@hs.local",
+      "user081@hs.local",
+      "user082@hs.local",
+      "user083@hs.local",
+      "user084@hs.local",
+      "user085@hs.local",
+      "user086@hs.local",
+      "user087@hs.local",
+      "user088@hs.local",
+      "user089@hs.local",
+      "user090@hs.local",
+      "user091@hs.local",
+      "user092@hs.local",
+      "user093@hs.local",
+      "user094@hs.local",
+      "user095@hs.local",
+      "user096@hs.local",
+      "user097@hs.local",
+      "user098@hs.local",
+      "user099@hs.local",
+      "user100@hs.local"
+    ],
+    "group:blocked": [],
+    "group:premium": [
+      "user001@hs.local",
+      "user002@hs.local"
+    ]
+  },
+  "tagOwners": {
+    "tag:exit-node": [
+      "group:admins"
+    ],
+    "tag:server": [
+      "group:admins"
+    ],
+    "tag:router": [
+      "group:admins"
+    ]
+  },
+  "acls": [
+    {
+      "action": "accept",
+      "src": [
+        "group:admins"
+      ],
+      "dst": [
+        "*:*"
+      ]
+    },
+    {
+      "action": "accept",
+      "src": [
+        "group:users"
+      ],
+      "dst": [
+        "tag:exit-node:*"
+      ]
+    },
+    {
+      "action": "accept",
+      "src": [
+        "group:premium"
+      ],
+      "dst": [
+        "tag:exit-node:*",
+        "tag:server:*"
+      ]
+    }
+  ],
+  "autoApprovers": {
+    "routes": {
+      "0.0.0.0/0": [
+        "group:admins"
+      ],
+      "::/0": [
+        "group:admins"
+      ]
+    },
+    "exitNode": [
+      "group:admins"
+    ]
+  },
+  "ssh": [
+    {
+      "action": "accept",
+      "src": [
+        "group:admins"
+      ],
+      "dst": [
+        "tag:server"
+      ],
+      "users": [
+        "autogroup:nonroot",
+        "root"
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "src": "user001@hs.local",
+      "deny": [
+        "user002@hs.local:22"
+      ]
+    },
+    {
+      "src": "user001@hs.local",
+      "accept": [
+        "tag:exit-node:443"
+      ]
+    },
+    {
+      "src": "admin@hs.local",
+      "accept": [
+        "user003@hs.local:22"
+      ]
+    },
+    {
+      "src": "user003@hs.local",
+      "deny": [
+        "user003@hs.local:22"
+      ]
+    },
+    {
+      "src": "user050@hs.local",
+      "deny": [
+        "user049@hs.local:80"
+      ]
+    }
+  ]
+}
