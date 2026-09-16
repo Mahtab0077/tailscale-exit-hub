@@ -1,0 +1,21 @@
+name: Test Tailscale
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Tailscale
+        run: |
+          curl -fsSL https://tailscale.com/install.sh | sh
+      
+      - name: Test Connection
+        env:
+          TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
+        run: |
+          echo "Testing with auth key: ${TS_AUTHKEY:0:20}..."
+          tailscale up --authkey="$TS_AUTHKEY" --hostname=test-gh --accept-routes 2>&1
+          echo "Exit code: $?"
+          tailscale status 2>&1
