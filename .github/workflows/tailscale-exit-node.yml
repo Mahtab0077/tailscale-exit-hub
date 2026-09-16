@@ -35,8 +35,7 @@ jobs:
             --authkey="$TS_AUTHKEY" \
             --hostname="gh-exit-${{ github.run_id }}" \
             --accept-dns=false \
-            --accept-routes=false \
-            --verbose=1 2>&1 | tee tailscale.log
+            --accept-routes=false 2>&1 | tee tailscale.log
           
           EXIT_CODE=${PIPESTATUS[0]}
           cat tailscale.log
