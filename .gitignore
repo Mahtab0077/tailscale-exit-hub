@@ -1,0 +1,26 @@
+# Logs
+logs/
+*.log
+
+# Config with secrets
+config/auth.key
+config/settings.conf
+
+# Users data
+users/users.json
+
+# PID files
+*.pid
+
+# Python
+__pycache__/
+*.pyc
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
