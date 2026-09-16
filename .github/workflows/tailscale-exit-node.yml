@@ -26,7 +26,7 @@ jobs:
           curl -fsSL https://tailscale.com/install.sh | sh
           echo "✅ Tailscale installed"
       
-      - name: Connect as Exit Node
+      - name: Connect to Tailscale (without exit node flag)
         env:
           TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
         run: |
@@ -34,7 +34,6 @@ jobs:
           tailscale up \
             --authkey="$TS_AUTHKEY" \
             --hostname="gh-exit-${{ github.run_id }}" \
-            --advertise-exit-node \
             --accept-dns=false \
             --accept-routes=false \
             --verbose=1 2>&1 | tee tailscale.log
@@ -49,6 +48,22 @@ jobs:
           else
             echo "❌ Connection failed"
             exit 1
+          fi
+      
+      - name: Enable Exit Node
+        env:
+          TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
+        run: |
+          echo "🚪 Enabling Exit Node..."
+          # Try to enable exit node
+          tailscale set --advertise-exit-node 2>&1 | tee exit_node.log
+          EXIT_CODE=${PIPESTATUS[0]}
+          cat exit_node.log
+          
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "✅ Exit Node advertised!"
+          else
+            echo "⚠️ Could not advertise exit node (may need admin approval)"
           fi
       
       - name: Verify Exit Node
