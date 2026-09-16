@@ -11,11 +11,25 @@ jobs:
         run: |
           curl -fsSL https://tailscale.com/install.sh | sh
       
-      - name: Connect with ephemeral
+      - name: Connect with ephemeral flag
         env:
           TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
         run: |
-          # Try with ephemeral flag
-          tailscale up --authkey="$TS_AUTHKEY" --hostname=test-gh-ephemeral --accept-dns=false --accept-routes=false --verbose=2 2>&1
-          echo "Exit code: $?"
+          # Ephemeral nodes auto-cleanup when disconnected
+          tailscale up \
+            --authkey="$TS_AUTHKEY" \
+            --hostname=test-gh-ephemeral \
+            --accept-dns=false \
+            --accept-routes=false \
+            --verbose=2 2>&1
+          EXIT_CODE=$?
+          echo "Exit code: $EXIT_CODE"
           tailscale status 2>&1
+          
+      - name: Wait and verify
+        run: |
+          sleep 10
+          echo "--- Status after wait ---"
+          tailscale status 2>&1
+          echo "--- IP ---"
+          tailscale ip -4 2>&1
