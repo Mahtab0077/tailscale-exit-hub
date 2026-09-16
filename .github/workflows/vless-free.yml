@@ -1,0 +1,168 @@
+name: VLESS Free VPN
+
+on:
+  workflow_dispatch:
+    inputs:
+      duration:
+        description: 'مدت زمان (دقیقه) - حداکثر 350'
+        required: false
+        default: '350'
+      chain:
+        description: 'وصل شدن به run بعدی (auto-restart)'
+        required: false
+        default: 'true'
+        type: boolean
+
+jobs:
+  vless-node:
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ fromJson(github.event.inputs.duration || '350') }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Install Xray (VLESS Server)
+        run: |
+          echo "🔧 Installing Xray-core..."
+          wget -q https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip -O /tmp/xray.zip
+          unzip -o /tmp/xray.zip -d /tmp/xray
+          chmod +x /tmp/xray/xray
+          
+          # Generate UUID
+          UUID=$(cat /proc/sys/kernel/random/uuid)
+          echo "UUID=$UUID" >> $GITHUB_ENV
+          echo "🔑 Generated UUID: $UUID"
+          
+          # Create config
+          mkdir -p /tmp/xray
+          cat > /tmp/xray/config.json <<EOF
+{
+  "inbounds": [{
+    "port": 8080,
+    "listen": "0.0.0.0",
+    "protocol": "vless",
+    "settings": {
+      "clients": [{ "id": "$UUID" }],
+      "decryption": "none"
+    },
+    "streamSettings": {
+      "network": "ws",
+      "wsSettings": { "path": "/vless" }
+    }
+  }],
+  "outbounds": [{ "protocol": "freedom", "tag": "direct" }]
+}
+EOF
+          echo "✅ Xray config created"
+      
+      - name: Start VLESS Server
+        run: |
+          echo "🚀 Starting VLESS server..."
+          nohup /tmp/xray/xray run -config /tmp/xray/config.json > /tmp/xray.log 2>&1 &
+          XRAY_PID=$!
+          sleep 3
+          echo "VLESS server started (PID: $XRAY_PID)"
+          echo "XRAY_PID=$XRAY_PID" >> $GITHUB_ENV
+          
+          # Verify
+          netstat -tlnp 2>/dev/null | grep 8080 || echo "Port 8080 listening"
+      
+      - name: Install Cloudflared
+        run: |
+          wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+          sudo dpkg -i cloudflared-linux-amd64.deb
+          echo "✅ Cloudflared installed"
+      
+      - name: Start Cloudflare Tunnel
+        run: |
+          echo "🌐 Starting Cloudflare Quick Tunnel..."
+          nohup cloudflared tunnel --no-autoupdate --url http://localhost:8080 > /tmp/tunnel.log 2>&1 &
+          TUNNEL_PID=$!
+          echo "TUNNEL_PID=$TUNNEL_PID" >> $GITHUB_ENV
+          sleep 10
+          
+          # Extract URL
+          CFGURL=$(grep -o 'https://[^[:space:]]*trycloudflare.com' /tmp/tunnel.log | tail -1 || true)
+          if [ -n "$CFGURL" ]; then
+            HOST=$(echo "$CFGURL" | sed 's|https://||')
+            echo "TUNNEL_HOST=$HOST" >> $GITHUB_ENV
+            echo "🌐 Tunnel Host: $HOST"
+          else
+            echo "⚠️ Tunnel URL not found yet"
+            cat /tmp/tunnel.log | tail -20
+          fi
+      
+      - name: Show VLESS Info
+        run: |
+          echo "═══════════════════════════════════════"
+          echo "   🎯 VLESS FREE VPN - READY TO USE"
+          echo "═══════════════════════════════════════"
+          if [ -n "${TUNNEL_HOST:-}" ]; then
+            UUID="${UUID:-$(cat /proc/sys/kernel/random/uuid)}"
+            ENCODED_PATH="%2Fvless"
+            VLESS_LINK="vless://${UUID}@${TUNNEL_HOST}:443?type=ws&security=tls&path=${ENCODED_PATH}&sni=${TUNNEL_HOST}#GitHub-Actions-VLESS-${{ github.run_id }}"
+            
+            echo "🌐 Tunnel Host: ${TUNNEL_HOST}"
+            echo "🔑 UUID: ${UUID}"
+            echo "📡 Port: 443"
+            echo "📁 Path: /vless"
+            echo ""
+            echo "📱 VLESS LINK (copy this):"
+            echo "${VLESS_LINK}"
+            echo ""
+            echo "═══════════════════════════════════════"
+            echo ""
+            echo "🍎 iOS: Shadowrocket / V2Box"
+            echo "🤖 Android: V2RayNG"
+            echo "💻 Windows: v2rayN"
+            echo ""
+            echo "📁 Subscription saved to:"
+            mkdir -p ${{ github.workspace }}/subscriptions
+            echo "${VLESS_LINK}" > ${{ github.workspace }}/subscriptions/server.info
+            cat > ${{ github.workspace }}/subscriptions/user-template.json <<EOF2
+{
+  "name": "USERNAME",
+  "email": "user@example.com",
+  "uuid": "${UUID}",
+  "status": "active",
+  "traffic_limit_gb": 100,
+  "added": "$(date -Iseconds)"
+}
+EOF2
+          else
+            echo "⚠️ Tunnel not ready yet - check logs"
+            cat /tmp/tunnel.log
+          fi
+          echo "═══════════════════════════════════════"
+          echo "🔗 Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+      
+      - name: Keep Alive
+        run: |
+          echo "⏳ Running for ${{ github.event.inputs.duration || '350' }} minutes..."
+          echo "📊 Runner: $(curl -s http://ip-api.com/line/?fields=country,city,as 2>/dev/null | paste -sd ' ' || echo 'Unknown')"
+          echo "🔄 Auto-chain will trigger next run if enabled"
+          echo ""
+          sleep $(( ${{ github.event.inputs.duration || '350' }} * 60 ))
+      
+      - name: Auto-chain Next Run
+        if: ${{ github.event.inputs.chain == 'true' }}
+        continue-on-error: true
+        run: |
+          echo "🔄 Triggering next VLESS run..."
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -d '{"ref":"main","inputs":{"duration":"350","chain":"true"}}' \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/vless-free.yml/dispatches" 2>&1 || true
+          echo "✅ Next run triggered (if token valid)"
+      
+      - name: Cleanup
+        if: always()
+        run: |
+          echo "🛑 Cleaning up..."
+          if [ -n "${XRAY_PID:-}" ]; then kill $XRAY_PID 2>/dev/null || true; fi
+          if [ -n "${TUNNEL_PID:-}" ]; then kill $TUNNEL_PID 2>/dev/null || true; fi
+          pkill -f cloudflared 2>/dev/null || true
+          pkill -f xray 2>/dev/null || true
+          echo "✅ Cleaned up"
