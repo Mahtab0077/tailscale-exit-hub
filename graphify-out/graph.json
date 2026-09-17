@@ -1,0 +1,1114 @@
+{
+  "nodes": [
+    {
+      "id": "cleanup_tailscale_nodes",
+      "label": "cleanup_tailscale_nodes.py",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_tailscale_nodes.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "cleanup_tailscale_nodes_get_env_or_prompt",
+      "label": "get_env_or_prompt()",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_tailscale_nodes.py",
+      "source_location": "L8"
+    },
+    {
+      "id": "cleanup_tailscale_nodes_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "scripts/cleanup_tailscale_nodes.py",
+      "source_location": "L14"
+    },
+    {
+      "id": "server",
+      "label": "server.py",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_tailscalehandler",
+      "label": "TailscaleHandler",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L17"
+    },
+    {
+      "id": "server_tailscalehandler_do_get",
+      "label": ".do_GET()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "server_tailscalehandler_do_post",
+      "label": ".do_POST()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L37"
+    },
+    {
+      "id": "server_tailscalehandler_serve_home",
+      "label": ".serve_home()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L50"
+    },
+    {
+      "id": "server_tailscalehandler_serve_status",
+      "label": ".serve_status()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L216"
+    },
+    {
+      "id": "server_tailscalehandler_serve_users",
+      "label": ".serve_users()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L220"
+    },
+    {
+      "id": "server_tailscalehandler_serve_health",
+      "label": ".serve_health()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L224"
+    },
+    {
+      "id": "server_tailscalehandler_handle_api",
+      "label": ".handle_api()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L227"
+    },
+    {
+      "id": "server_tailscalehandler_handle_api_post",
+      "label": ".handle_api_post()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L235"
+    },
+    {
+      "id": "server_tailscalehandler_get_status",
+      "label": ".get_status()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L252"
+    },
+    {
+      "id": "server_tailscalehandler_get_users",
+      "label": ".get_users()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L282"
+    },
+    {
+      "id": "server_tailscalehandler_toggle_user",
+      "label": ".toggle_user()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L291"
+    },
+    {
+      "id": "server_tailscalehandler_send_json",
+      "label": ".send_json()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L307"
+    },
+    {
+      "id": "server_tailscalehandler_log_message",
+      "label": ".log_message()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L313"
+    },
+    {
+      "id": "server_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "web/server.py",
+      "source_location": "L316"
+    },
+    {
+      "id": "vless_panel",
+      "label": "vless_panel.py",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "vless_panel_vlessmanager",
+      "label": "VLESSManager",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L21"
+    },
+    {
+      "id": "vless_panel_vlessmanager_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L22"
+    },
+    {
+      "id": "vless_panel_vlessmanager_load_users",
+      "label": "._load_users()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L27"
+    },
+    {
+      "id": "vless_panel_vlessmanager_save_users",
+      "label": "._save_users()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "vless_panel_vlessmanager_generate_uuid",
+      "label": ".generate_uuid()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L38"
+    },
+    {
+      "id": "vless_panel_vlessmanager_add_user",
+      "label": ".add_user()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L42"
+    },
+    {
+      "id": "vless_panel_vlessmanager_remove_user",
+      "label": ".remove_user()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L63"
+    },
+    {
+      "id": "vless_panel_vlessmanager_toggle_user",
+      "label": ".toggle_user()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L72"
+    },
+    {
+      "id": "vless_panel_vlessmanager_get_users",
+      "label": ".get_users()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L84"
+    },
+    {
+      "id": "vless_panel_vlessmanager_get_user",
+      "label": ".get_user()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L87"
+    },
+    {
+      "id": "vless_panel_vlessmanager_generate_vless_link",
+      "label": ".generate_vless_link()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L93"
+    },
+    {
+      "id": "vless_panel_vlessmanager_generate_subscription",
+      "label": ".generate_subscription()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L106"
+    },
+    {
+      "id": "vless_panel_vlesshandler",
+      "label": "VLESSHandler",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L121"
+    },
+    {
+      "id": "vless_panel_vlesshandler_send_json",
+      "label": "._send_json()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L124"
+    },
+    {
+      "id": "vless_panel_vlesshandler_send_html",
+      "label": "._send_html()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L131"
+    },
+    {
+      "id": "vless_panel_vlesshandler_do_get",
+      "label": ".do_GET()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L137"
+    },
+    {
+      "id": "vless_panel_vlesshandler_do_post",
+      "label": ".do_POST()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L166"
+    },
+    {
+      "id": "vless_panel_vlesshandler_serve_dashboard",
+      "label": "._serve_dashboard()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L211"
+    },
+    {
+      "id": "vless_panel_vlesshandler_log_message",
+      "label": ".log_message()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L599"
+    },
+    {
+      "id": "vless_panel_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L602"
+    }
+  ],
+  "edges": [
+    {
+      "source": "cleanup_tailscale_nodes",
+      "target": "os",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_tailscale_nodes.py",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "cleanup_tailscale_nodes",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_tailscale_nodes.py",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "cleanup_tailscale_nodes",
+      "target": "urllib_request",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_tailscale_nodes.py",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "cleanup_tailscale_nodes",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_tailscale_nodes.py",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "cleanup_tailscale_nodes",
+      "target": "base64",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_tailscale_nodes.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "cleanup_tailscale_nodes",
+      "target": "cleanup_tailscale_nodes_get_env_or_prompt",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_tailscale_nodes.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "cleanup_tailscale_nodes",
+      "target": "cleanup_tailscale_nodes_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/cleanup_tailscale_nodes.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "http_server",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "subprocess",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "os",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "urllib_parse",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "server_tailscalehandler",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler",
+      "target": "server_tailscalehandler_do_get",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler",
+      "target": "server_tailscalehandler_do_post",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler",
+      "target": "server_tailscalehandler_serve_home",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler",
+      "target": "server_tailscalehandler_serve_status",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L216",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler",
+      "target": "server_tailscalehandler_serve_users",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L220",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler",
+      "target": "server_tailscalehandler_serve_health",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L224",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler",
+      "target": "server_tailscalehandler_handle_api",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L227",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler",
+      "target": "server_tailscalehandler_handle_api_post",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L235",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler",
+      "target": "server_tailscalehandler_get_status",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L252",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler",
+      "target": "server_tailscalehandler_get_users",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L282",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler",
+      "target": "server_tailscalehandler_toggle_user",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L291",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler",
+      "target": "server_tailscalehandler_send_json",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L307",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler",
+      "target": "server_tailscalehandler_log_message",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L313",
+      "weight": 1.0
+    },
+    {
+      "source": "server",
+      "target": "server_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "web/server.py",
+      "source_location": "L316",
+      "weight": 1.0
+    },
+    {
+      "source": "server_tailscalehandler_do_get",
+      "target": "server_tailscalehandler_serve_home",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L25",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_do_get",
+      "target": "server_tailscalehandler_serve_status",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L27",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_do_get",
+      "target": "server_tailscalehandler_serve_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L29",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_do_get",
+      "target": "server_tailscalehandler_serve_health",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L31",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_do_get",
+      "target": "server_tailscalehandler_handle_api",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L33",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_do_post",
+      "target": "server_tailscalehandler_handle_api_post",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L46",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_serve_status",
+      "target": "server_tailscalehandler_get_status",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L217",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_serve_status",
+      "target": "server_tailscalehandler_send_json",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L218",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_serve_users",
+      "target": "server_tailscalehandler_get_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L221",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_serve_users",
+      "target": "server_tailscalehandler_send_json",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L222",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_serve_health",
+      "target": "server_tailscalehandler_send_json",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L225",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_handle_api",
+      "target": "server_tailscalehandler_serve_status",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L229",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_handle_api",
+      "target": "server_tailscalehandler_serve_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L231",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_handle_api_post",
+      "target": "server_tailscalehandler_send_json",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L238",
+      "weight": 0.8
+    },
+    {
+      "source": "server_tailscalehandler_handle_api_post",
+      "target": "server_tailscalehandler_toggle_user",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/server.py",
+      "source_location": "L247",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel",
+      "target": "http_server",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel",
+      "target": "subprocess",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel",
+      "target": "os",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel",
+      "target": "base64",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel",
+      "target": "urllib_parse",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel",
+      "target": "urllib_parse",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel",
+      "target": "vless_panel_vlessmanager",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlessmanager",
+      "target": "vless_panel_vlessmanager_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlessmanager",
+      "target": "vless_panel_vlessmanager_load_users",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlessmanager",
+      "target": "vless_panel_vlessmanager_save_users",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlessmanager",
+      "target": "vless_panel_vlessmanager_generate_uuid",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlessmanager",
+      "target": "vless_panel_vlessmanager_add_user",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlessmanager",
+      "target": "vless_panel_vlessmanager_remove_user",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlessmanager",
+      "target": "vless_panel_vlessmanager_toggle_user",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlessmanager",
+      "target": "vless_panel_vlessmanager_get_users",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L84",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlessmanager",
+      "target": "vless_panel_vlessmanager_get_user",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlessmanager",
+      "target": "vless_panel_vlessmanager_generate_vless_link",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L93",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlessmanager",
+      "target": "vless_panel_vlessmanager_generate_subscription",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel",
+      "target": "vless_panel_vlesshandler",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L121",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlesshandler",
+      "target": "vless_panel_vlesshandler_send_json",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L124",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlesshandler",
+      "target": "vless_panel_vlesshandler_send_html",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L131",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlesshandler",
+      "target": "vless_panel_vlesshandler_do_get",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L137",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlesshandler",
+      "target": "vless_panel_vlesshandler_do_post",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L166",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlesshandler",
+      "target": "vless_panel_vlesshandler_serve_dashboard",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L211",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlesshandler",
+      "target": "vless_panel_vlesshandler_log_message",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L599",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel",
+      "target": "vless_panel_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L602",
+      "weight": 1.0
+    },
+    {
+      "source": "vless_panel_vlessmanager_init",
+      "target": "vless_panel_vlessmanager_save_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L25",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlessmanager_add_user",
+      "target": "vless_panel_vlessmanager_load_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L43",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlessmanager_add_user",
+      "target": "vless_panel_vlessmanager_generate_uuid",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L49",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlessmanager_add_user",
+      "target": "vless_panel_vlessmanager_save_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L60",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlessmanager_remove_user",
+      "target": "vless_panel_vlessmanager_load_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L64",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlessmanager_remove_user",
+      "target": "vless_panel_vlessmanager_save_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L68",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlessmanager_toggle_user",
+      "target": "vless_panel_vlessmanager_load_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L73",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlessmanager_toggle_user",
+      "target": "vless_panel_vlessmanager_save_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L80",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlessmanager_get_users",
+      "target": "vless_panel_vlessmanager_load_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L85",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlessmanager_get_user",
+      "target": "vless_panel_vlessmanager_get_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L88",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlessmanager_generate_vless_link",
+      "target": "vless_panel_vlessmanager_get_user",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L94",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlessmanager_generate_subscription",
+      "target": "vless_panel_vlessmanager_get_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L107",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlessmanager_generate_subscription",
+      "target": "vless_panel_vlessmanager_generate_vless_link",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L110",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlesshandler_do_get",
+      "target": "vless_panel_vlesshandler_serve_dashboard",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L143",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlesshandler_do_get",
+      "target": "vless_panel_vlesshandler_send_json",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L145",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlesshandler_do_get",
+      "target": "vless_panel_vlessmanager_get_users",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L145",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlesshandler_do_get",
+      "target": "vless_panel_vlessmanager_generate_subscription",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L148",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlesshandler_do_get",
+      "target": "vless_panel_vlessmanager_generate_vless_link",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L156",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlesshandler_do_post",
+      "target": "vless_panel_vlesshandler_send_json",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L183",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlesshandler_do_post",
+      "target": "vless_panel_vlessmanager_add_user",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L185",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlesshandler_do_post",
+      "target": "vless_panel_vlessmanager_remove_user",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L193",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlesshandler_do_post",
+      "target": "vless_panel_vlessmanager_toggle_user",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L202",
+      "weight": 0.8
+    },
+    {
+      "source": "vless_panel_vlesshandler_serve_dashboard",
+      "target": "vless_panel_vlesshandler_send_html",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "source_file": "web/vless_panel.py",
+      "source_location": "L597",
+      "weight": 0.8
+    }
+  ]
+}

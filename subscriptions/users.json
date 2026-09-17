@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "name": "مشتری اول",
+      "email": "customer1@example.com",
+      "uuid": "7ee99000-d5f3-4e8c-9eb7-3ca8ba6f77fb",
+      "status": "active",
+      "traffic_limit_gb": 100,
+      "traffic_used_gb": 0,
+      "added": "1789653176.9691803"
+    }
+  ]
+}
