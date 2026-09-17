@@ -8,6 +8,15 @@
       "traffic_limit_gb": 100,
       "traffic_used_gb": 0,
       "added": "1789653176.9691803"
+    },
+    {
+      "name": "مشتری دوم",
+      "email": "customer2@example.com",
+      "uuid": "251567ad-6ace-4194-b07b-162bb552edaa",
+      "status": "active",
+      "traffic_limit_gb": 50,
+      "traffic_used_gb": 0,
+      "added": "1789653176.9891803"
     }
   ]
 }
