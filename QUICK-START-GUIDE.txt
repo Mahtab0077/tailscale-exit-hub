@@ -1,0 +1,200 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║              🚀 QUICK START - شروع فوری (30 دقیقه) 🚀                     ║
+║                                                                            ║
+║                    سیستم فروش فیلترشکن IP ثابت                          ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+فاز 1: تنظیمات پایه (15 دقیقه)
+═══════════════════════════════════════════════════════════════════════════
+
+✅ Step 1: Domain ثبت (5 min)
+   - namecheap.com یا godaddy.com
+   - قیمت: $0.99-10
+   - نام: exit-hub.ir (یا متفاوت)
+
+✅ Step 2: Bot Token (5 min)
+   - تلگرام: @BotFather
+   - /newbot
+   - نام: Exit Hub VPN
+   - Username: exit_hub_bot
+   - Token کپی کنید
+
+✅ Step 3: Admin ID (5 min)
+   - تلگرام: @userinfobot
+   - ID خودتان را دریافت کنید
+
+
+فاز 2: تکنیکی (15 دقیقه)
+═══════════════════════════════════════════════════════════════════════════
+
+✅ Step 4: Cloudflare Tunnel (7 min)
+   cd /workspace/tailscale-exit-hub
+   bash SETUP-CLOUDFLARE-TUNNEL.sh
+
+✅ Step 5: Bot Setup (5 min)
+   - ویرایش: telegram_bot.py
+   - خط 18: TELEGRAM_TOKEN = "YOUR_TOKEN"
+   - خط 19: ADMIN_ID = YOUR_ID
+   
+   نصب dependencies:
+   pip install python-telegram-bot requests
+   
+   شروع Bot:
+   nohup python3 telegram_bot.py > bot.log 2>&1 &
+
+✅ Step 6: Test (3 min)
+   - تلگرام: @exit_hub_bot
+   - /start را بزنید
+   - /packages را بزنید
+   - چک کنید!
+
+
+نتیجه: سیستم فعال! 🎉
+═══════════════════════════════════════════════════════════════════════════
+
+✅ Xray Server: Running
+✅ Panel: Running (http://localhost:8888)
+✅ Bot: Running (Telegram @exit_hub_bot)
+✅ IP: Static via Cloudflare
+✅ Ready to sell! 💰
+
+
+راه اندازی فروش (آغاز درآمد)
+═══════════════════════════════════════════════════════════════════════════
+
+گام 1: مشتری اول
+   - به @exit_hub_bot در تلگرام بروید
+   - /packages بزنید
+   - Pro را انتخاب کنید ($5/month)
+   - /pay pro را اجرا کنید
+   - لینک دریافت کنید ✅
+
+گام 2: اشتراک بگیرید
+   - نرم‌افزار v2rayNG را نصب کنید
+   - لینک را اضافه کنید
+   - متصل شوید!
+
+گام 3: ترویج کنید
+   - تلگرام: پیام دوستان
+   - Twitter: توئیت کنید
+   - Reddit: پست کنید
+
+
+درآمد فوری
+═══════════════════════════════════════════════════════════════════════════
+
+10 مشتری: $50/month
+30 مشتری: $150/month
+100 مشتری: $500+/month
+
+هزینه: $0 ✅
+سود: 100% ✅
+
+
+دستورات سریع
+═══════════════════════════════════════════════════════════════════════════
+
+# وضعیت سیستم
+ps aux | grep -E "xray|vless_panel|python3 telegram"
+
+# لیست مشتریان
+curl http://localhost:8888/api/users | python3 -m json.tool
+
+# لاگ‌های Bot
+tail -f bot.log
+
+# لاگ‌های Xray
+tail -f /opt/xray/xray.log
+
+# Dashboard
+http://localhost:8888
+
+
+مشکل‌یابی سریع
+═══════════════════════════════════════════════════════════════════════════
+
+Bot نمی‌رود?
+└─ Token را چک کنید: telegram_bot.py خط 18
+
+API 404?
+└─ Panel را restart کنید: pkill python3 && ./start-vless-manager.sh
+
+لینک نیست?
+└─ Host را درست وارد کنید: exit.yourdomain.com
+
+Connection خطا?
+└─ Cloudflare tunnel را چک کنید: cloudflared tunnel list
+
+
+سفارشات مفید
+═══════════════════════════════════════════════════════════════════════════
+
+📧 Email (آینده):
+   - نصب: pip install smtplib
+   - تهیه: Gmail app password
+
+💳 Payment (آینده):
+   - Stripe: https://stripe.com
+   - Coinbase: https://commerce.coinbase.com
+
+📊 Analytics (آینده):
+   - Google Analytics
+   - Custom dashboard
+
+
+هدف ماهانه
+═══════════════════════════════════════════════════════════════════════════
+
+Week 1:
+├─ Setup complete ✅
+├─ 5 مشتری
+└─ $25 درآمد
+
+Week 2-4:
+├─ 20 مشتری
+├─ $100 درآمد
+└─ بهتری‌های کوچک
+
+Month 2-3:
+├─ 50 مشتری
+├─ $250 درآمد
+└─ Telegram channel
+
+Month 6:
+├─ 100+ مشتری
+├─ $500+ درآمد
+└─ فول‌تایم شغل!
+
+
+مستندات
+═══════════════════════════════════════════════════════════════════════════
+
+- README-FA.md: شروع
+- MONETIZATION-GUIDE.md: درآمد
+- TELEGRAM-BOT-SETUP.md: Bot
+- VLESS-SYSTEM.md: فنی
+- STATIC-IP-SOLUTION.md: IP
+
+
+نیاز کمک؟
+═══════════════════════════════════════════════════════════════════════════
+
+سوالات:
+├─ Bot دقیق کاری نمی‌کند؟
+├─ Payment gateway نصب کنم؟
+├─ Admin dashboard بسازم؟
+├─ Email system اضافه کنم؟
+└─ یا...؟
+
+فقط بگو! 🚀
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+🎉 عالی! شروع کنید و پول درآوری‌ها کنید! 💰
+
+Generated: 2026-09-17T14:29:48.832Z
+Status: READY TO LAUNCH
+
